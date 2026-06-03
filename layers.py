@@ -46,7 +46,8 @@ class GraphAttentionLayer(nn.Module):
         Wh1 = torch.matmul(Wh, self.a[:self.out_features, :])
         Wh2 = torch.matmul(Wh, self.a[self.out_features:, :])
         # broadcast add
-        e = Wh1 + Wh2.T
+        e = Wh1 + Wh2.t()
+        # e = Wh1 + Wh2.T
         return self.leakyrelu(e)
 
     def __repr__(self):
